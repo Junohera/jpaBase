@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Memo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long mno;
 
     @Column(length = 200, nullable = false)
