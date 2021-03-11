@@ -4,6 +4,7 @@ import com.juno.jpabase.entity.Memo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -40,5 +41,18 @@ public class MemoRepositoryTests {
             Memo memo = result.get();
             System.out.println(memo);
         }
+    }
+
+    @Transactional
+    @Test
+    public void testSelect2() {
+        // DB에 존재하는 mno
+        Long mno = 100L;
+
+        Memo memo = memoRepository.getOne(mno);
+
+        System.out.println("================================");
+
+        System.out.println(memo);
     }
 }
