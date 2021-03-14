@@ -11,6 +11,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -164,4 +166,34 @@ public class MemoRepositoryTests {
         memoRepository.deleteMemoByMnoLessThan(10L);
     }
 
+    @Test
+    public void testgetListDesc() {
+        List<Memo> list = memoRepository.getListDesc();
+        list.forEach(m -> System.out.println(m));
+    }
+
+    @Test
+    public void testUpdateMemoText() {
+        int result = memoRepository.updateMemoText(10L, "update by query");
+        System.out.println(result);
+    }
+
+    @Test
+    public void testUpdateMemoText2() {
+        Memo memo = Memo.builder()
+                .mno(10L)
+                .memoText("update by query2")
+                .build();
+        int result = memoRepository.updateMemoText(memo);
+        System.out.println(result);
+    }
+
+    @Test
+    public void testGetListWithQuery() {
+        Pageable pageable = PageRequest.of(0, 10);
+
+        Page<Memo> result = memoRepository.getListWithQuery(55L, pageable);
+
+        result.get().forEach(m -> System.out.println(m));
+    }
 }
